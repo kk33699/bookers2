@@ -17,7 +17,6 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
   end
 
-
   def create
     @book = Book.new(book_params)
     @book.user_id = current_user.id
@@ -28,8 +27,16 @@ class BooksController < ApplicationController
     end
   end
 
-  private
+  def destroy
+    @book = Book.find(params[:id]) # IDで指定されたBookを取得
+    if @book.destroy
+      redirect_to books_path, notice: 'Book was successfully deleted.' # 削除成功後にリダイレクト
+    else
+      redirect_to books_path, alert: 'Failed to delete the book.' # 削除に失敗した場合の処理
+    end
+  end
 
+  private
 
   def book_params
     params.require(:book).permit(:title, :body)
