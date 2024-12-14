@@ -35,29 +35,29 @@
           </tr>
         </thead>
         <tbody>
-        <% @books.each do |book| %>
-          <tr>
-            <td>
-              <% if book.user.image.present? %>
-                <%= image_tag book.user.image, class: "img-thumbnail", size: "100x100" %>
-              <% else %>
-                <div class="no-image-placeholder">
-                  <p>NO IMAGE</p>
-                </div>
-              <% end %>
-            </td>
-            <td>
+          <% if @books.present? %>
+            <% @books.each do |book| %>
+              <tr>
+                <td>
+                  <% if book.user.image.present? %>
+                    <%= image_tag book.user.image, class: "img-thumbnail", size: "100x100" %>
+                  <% else %>
+                    <div class="no-image-placeholder">
+                      <p>NO IMAGE</p>
+                    </div>
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to book.title, book_path(book) %>
+                </td>
+                <td>
+                  <%= book.body %>
+                </td>
 
-              <%= link_to book.title, book_path(book) %>
-            </td>
-            <td><%= book.body %></td>
-            <td>
-          <!-- Showは削除する。現状は念のため残している -->
-              <%= link_to 'Show', book_path(book) %>
-            </td>
-          </tr>
-        <% end %>
-        </tbody>      
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
       </table>
     </div>
   </div>
@@ -72,10 +72,10 @@
           <ul>
             <% @book.errors.full_messages.each do |message| %>
               <li><%= message %></li>
-            <% end %>
+            <% end %> <!-- @book.errors.full_messagesのend -->
           </ul>
         </div>
-      <% end %>
+      <% end %> 
 
       <%= form_with model: @book, local: true do |f| %>
         <div class="mb-2">
@@ -87,8 +87,7 @@
           <%= f.text_area :body, class: "form-control" %>
         </div>
         <%= f.submit 'Create Book', class: "btn btn-success" %>
-      <% end %>
+      <% end %> 
     </div>
   </div>
 </div>
-
