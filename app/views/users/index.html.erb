@@ -52,4 +52,31 @@
     <% end %>
   </div>
 
-
+  <!-- 右上: Users -->
+  <div class="col-md-8">
+    <h1>Users</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>image</th>
+          <th>name</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td>
+              <% if user.image.present? %>
+                <%= image_tag user.image, class: "img-thumbnail", size: "100x100" %>
+              <% else %>
+                <div class="no-image-placeholder">NO IMAGE</div>
+              <% end %>
+            </td>
+            <td><%= user.name %></td>
+            <td><%= link_to 'Show', user_path(user) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>

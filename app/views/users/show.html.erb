@@ -1,2 +1,86 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<h1>app/views/users/show.html.erb ページ</h1>
+
+<div class="container">
+    <!-- 左上: User info-->
+      <h1>User info</h1>
+      <% if current_user&.image.present? %>
+        <%= image_tag current_user.image, class: "img-fluid" %>
+      <% else %>
+        <div class="no-image-placeholder">
+          <p>NO IMAGE</p>
+        </div>
+      <% end %>
+      <table class="table">
+        <tr>
+          <th>name</th>
+          <td><%= current_user&.name || 'N/A' %></td>
+        </tr>
+        <tr>
+          <th>introduction</th>
+          <td><%= current_user&.introduction || 'N/A' %></td>
+        </tr>
+      </table>
+      <%= link_to 'プロフィール編集', edit_user_path(current_user) if current_user %>
+    </div>
+  </div>
+</div>
+
+<!-- 左下: New book -->
+  <div class="col-md-3">
+    <h1>New book</h1>
+    <% if @book.errors.any? %>
+      <div class="alert alert-danger">
+        <strong><%= @book.errors.count %> errors prohibited this book from being saved:</strong>
+        <ul>
+          <% @book.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= form_with model: @book, local: true do |f| %>
+      <div class="mb-2">
+        <h4>Title</h4>
+        <%= f.text_field :title, class: "form-control" %>
+      </div>
+      <div class="mb-2">
+        <h4>Opinion</h4>
+        <%= f.text_area :body, class: "form-control" %>
+      </div>
+      <%= f.submit 'Create Book', class: "btn btn-success" %>
+    <% end %>
+  </div>
+
+  <!-- 右上: Books -->
+  <h1>Books</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Title</th>
+        <th>Opinion</th>
+        <th>項目削除する</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @books.each do |book| %>
+        <tr>
+          <td>
+            <% if book.user.image.present? %>
+              <%= image_tag book.user.image, class: "img-thumbnail", size: "100x100" %>
+            <% else %>
+              <div class="no-image-placeholder">
+                <p>NO IMAGE</p>
+              </div>
+            <% end %>
+          </td>
+          <td><%= link_to book.title, book_path(book) %></td>
+          <td><%= book.body %></td>
+    
+          <td><%= link_to 'Back', users_path %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
