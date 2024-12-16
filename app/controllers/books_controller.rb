@@ -25,7 +25,9 @@ class BooksController < ApplicationController
     if @book.save
       redirect_to book_path(@book.id), notice: 'You have created book successfully.（新規投稿しました）'
     else
-      render :new
+      @books = Book.includes(:user) 
+      @user = current_user
+      render :index
     end
   end
 
