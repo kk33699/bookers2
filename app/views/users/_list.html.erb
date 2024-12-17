@@ -18,7 +18,8 @@
       <td><%= current_user&.introduction || 'N/A' %></td>
     </tr>
   </table>
-  <%= link_to 'プロフィール編集', edit_user_path(current_user) if current_user %>
+  <!-- プロフィール編集ボタン -->
+  <%= link_to "<i class='fa-solid fa-user-gear'></i> プロフィール編集".html_safe, edit_user_path(current_user), class: "btn-secondary" if current_user %>
 </div>
 
 <!-- 左下: New book -->
