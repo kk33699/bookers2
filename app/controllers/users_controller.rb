@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
+  before_action :is_matching_login_user, only: [:edit, :update]
 
   def index
     @users = User.all
@@ -13,6 +14,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+  
   end
 
   def update
@@ -25,12 +27,17 @@ class UsersController < ApplicationController
 
   private
 
-
   def set_user
     @user = User.find(params[:id]) 
   end
 
   def user_params
     params.require(:user).permit(:name, :introduction, :image) 
+  end
+
+  def is_matching_login_user
+    unless @user.id == current_user.id
+      redirect_to books_path, alert: 'You are not authorized to edit this user.'
+    end
   end
 end
