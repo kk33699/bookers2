@@ -1,5 +1,3 @@
-<h1>app/views/users/show.html.erb ページ</h1>
-
 <div class="container">
   <div class="row">
     <%= render 'list' %>
@@ -13,7 +11,6 @@
         <th></th>
         <th>Title</th>
         <th>Opinion</th>
-        <th>項目削除</th>
       </tr>
     </thead>
     <tbody>
@@ -30,8 +27,6 @@
           </td>
           <td><%= link_to book.title, book_path(book) %></td>
           <td><%= book.body %></td>
-    
-          <td><%= link_to 'Back', users_path %></td>
         </tr>
       <% end %>
     </tbody>

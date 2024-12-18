@@ -1,37 +1,42 @@
 <div class="container">
-  <%= render 'books/list', user: @user, book: @book %>
+  <div class="row">
+    <!-- 左側:User infoとNew book -->
+    <div class="col-md-3">
+      <%= render 'books/list', user: @user, book: @book %>
+    </div>
 
-  <!-- 右上: Books -->
-  <div class="col-md-8">
-    <h1>Books</h1>
-    <table class="table">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Title</th>
-          <th>Opinion</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% if @books.present? %>
-          <% @books.each do |book| %>
-            <tr>
-              <td>
-                <% if book.user.image.present? %>
-                  <%= image_tag book.user.image, class: "img-thumbnail", size: "100x100" %>
-                <% else %>
-                  <div class="no-image-placeholder">
-                    <p>NO IMAGE</p>
-                  </div>
-                <% end %>
-              </td>
-              <td><%= link_to book.title, book_path(book) %></td>
-              <td><%= book.body %></td>
-            </tr>
+    <!-- 右上: Books -->
+    <div class="col-md-8 offset-md-1">
+      <h1>Books</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Title</th>
+            <th>Opinion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @books.present? %>
+            <% @books.each do |book| %>
+              <tr>
+                <td>
+                  <% if book.user.image.present? %>
+                    <%= image_tag book.user.image, class: "img-thumbnail", size: "100x100" %>
+                  <% else %>
+                    <div class="no-image-placeholder">
+                      <p>NO IMAGE</p>
+                    </div>
+                  <% end %>
+                </td>
+                <td><%= link_to book.title, book_path(book) %></td>
+                <td><%= book.body %></td>
+              </tr>
+            <% end %>
           <% end %>
-        <% end %>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 

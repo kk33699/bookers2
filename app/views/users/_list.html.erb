@@ -15,11 +15,11 @@
     </tr>
     <tr>
       <th>introduction</th>
-      <td><%= current_user&.introduction || 'N/A' %></td>
+      <td><%= current_user&.introduction || '' %></td>
     </tr>
   </table>
-  <!-- プロフィール編集ボタン -->
-  <%= link_to "<i class='fa-solid fa-user-gear'></i> プロフィール編集".html_safe, edit_user_path(current_user), class: "btn-secondary" if current_user %>
+
+  <%= link_to "<i class='fa-solid fa-user-gear'></i> プロフィール編集".html_safe, edit_user_path(current_user) %>
 </div>
 
 <!-- 左下: New book -->

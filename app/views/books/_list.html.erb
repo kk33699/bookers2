@@ -15,11 +15,11 @@
     </tr>
     <tr>
       <th>introduction</th>
-      <td><%= user&.introduction || 'N/A' %></td>
+      <td><%= user&.introduction || '' %></td>
     </tr>
   </table>
   <% if user %>
-    <%= link_to 'プロフィール編集', edit_user_path(user) %>
+    <%= link_to "<i class='fa-solid fa-user-gear'></i> プロフィール編集".html_safe, edit_user_path(user) %>
   <% end %>
 </div>
 
@@ -38,7 +38,7 @@
   <% end %>
 
   <%= form_with model: book, local: true do |f| %>
-    <div class="mb-2">
+    <div class="mb-5">
       <h4>Title</h4>
       <%= f.text_field :title, class: "form-control" %>
     </div>

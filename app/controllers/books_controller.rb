@@ -17,7 +17,7 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find(params[:id])
-    # 他人の投稿にアクセスした場合、自分のプロフィールページにリダイレクト
+    
     redirect_to user_path(current_user), notice: 'You are not authorized to edit this book.' unless @book.user == current_user
   end
 
