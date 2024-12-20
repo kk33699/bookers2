@@ -1,8 +1,8 @@
 <!-- 左上: User info-->
 <div class="col-md-3">
   <h1>User info</h1>
-  <% if current_user&.image.present? %>
-    <%= image_tag current_user.image, class: "img-fluid" %>
+  <% if user&.image.present? %>
+    <%= image_tag user.image, class: "img-fluid" %>
   <% else %>
     <div class="no-image-placeholder">
       <p>NO IMAGE</p>
@@ -11,15 +11,17 @@
   <table class="table">
     <tr>
       <th>name</th>
-      <td><%= current_user&.name || 'N/A' %></td>
+      <td><%= user&.name || 'N/A' %></td>
     </tr>
     <tr>
       <th>introduction</th>
-      <td><%= current_user&.introduction || '' %></td>
+      <td><%= user&.introduction || '' %></td>
     </tr>
   </table>
 
-  <%= link_to "<i class='fa-solid fa-user-gear'></i> プロフィール編集".html_safe, edit_user_path(current_user) %>
+  <% if current_user == user %>
+    <%= link_to "<i class='fa-solid fa-user-gear'></i> プロフィール編集".html_safe, edit_user_path(user), class: "btn btn-secondary" %>
+  <% end %>
 </div>
 
 <!-- 左下: New book -->

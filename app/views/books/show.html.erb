@@ -5,42 +5,35 @@
 
     <h1>Book detail</h1>
     <table class="table">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Title</th>
-          <th>Opinion</th>
-
-        </tr>
-      </thead>
-      <tbody>
-        <% if @book.present? %>
-          <tr>
-            <td>
-              <% if @book.user&.image.present? %>
-                <%= image_tag @book.user.image, class: "img-thumbnail", size: "100x100" %>
-              <% else %>
-                <div class="no-image-placeholder">
-                  <p>NO IMAGE</p>
-                </div>
-              <% end %>
-            </td>
-            <td><%= @book.title %></td>
-            <td><%= @book.body %></td>
-            <td>
-              <%= link_to 'Edit', edit_book_path(@book) %>
-              <% if @book.user == current_user %>
-                <%= link_to 'Destroy', book_path(@book), method: :delete, data: { confirm: 'Are you sure?' } %>
-              <% end %>
-
-            </td>
-          </tr>
-        <% else %>
-          <tr>
-            <td colspan="3">No book details available.</td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <tbody>
+    <% if @book.present? %>
+      <tr>
+        <td>
+          <% if @book.user&.image.present? %>
+            <%= link_to image_tag(@book.user.image, class: "img-thumbnail", size: "100x100"), user_path(@book.user) %>
+          <% else %>
+            <div class="no-image-placeholder">
+              <p>NO IMAGE</p>
+            </div>
+          <% end %>
+        </td>
+        <td><%= @book.title %></td>
+        <td><%= @book.body %></td>
+        <td>
+          <%= link_to @book.user.name, user_path(@book.user) %>
+        </td>
+        <td>
+          <% if @book.user == current_user %>
+            <%= link_to 'Edit', edit_book_path(@book) %>
+            <%= link_to 'Destroy', book_path(@book), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </td>
+      </tr>
+    <% else %>
+      <tr>
+        <td colspan="5">No book details available.</td>
+      </tr>
+    <% end %>
+  </tbody>
   </div>
 </div>

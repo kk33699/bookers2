@@ -23,7 +23,7 @@
   <%= f.file_field :image %>
   <% if @user.image.present? %>
     <p>Current image:</p>
-    <%= image_tag @user.image, class: "img-fluid" %>
+  <%= image_tag @user.image, class: "img-fluid" %>
   <% end %>
 
   <%= f.submit 'Update User', class: "btn btn-primary" %>
