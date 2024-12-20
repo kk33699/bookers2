@@ -37,10 +37,10 @@
         <% else %>
          <!-- ログイン前のベッター-->
           <li class="nav-item">
-            <%= link_to "<i class='fa-sharp fa-solid fa-house'></i> Home".html_safe, homes_top_path, class: "nav-link text-white" %>
+            <%= link_to "<i class='fa-sharp fa-solid fa-house'></i> Home".html_safe, root_path, class: "nav-link text-white" %>
           </li>
           <li class="nav-item">
-            <%= link_to "<i class='fa-solid fa-link'></i> About".html_safe, homes_about_path, class: "nav-link text-white" %>
+            <%= link_to "<i class='fa-solid fa-link'></i> About".html_safe, home_about_path, class: "nav-link text-white" %>
           </li>
           <li class="nav-item">
             <%= link_to "<i class='fa-solid fa-user-plus'></i> Sign up".html_safe, new_user_registration_path, class: "nav-link text-white" %>
