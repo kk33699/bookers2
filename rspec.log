@@ -298,7 +298,7 @@ Failures:
 
   2) [STEP2] ユーザログイン後のテスト 自分の投稿詳細画面のテスト サイドバーの確認 bodyフォームに値が入っていない
      [31mFailure/Error: expect(find_field('book[body]').text).to be_blank[0m
-     [31m  expected `"2gzi7p3ogfchg85ohmc8".blank?` to be truthy, got false[0m
+     [31m  expected `"f10v2sl46wfdhmn3mbwj".blank?` to be truthy, got false[0m
      [36m# ./spec/system/02_after_login_spec.rb:158:in `block (4 levels) in <main>'[0m
 
   3) [STEP2] ユーザログイン後のテスト 自分の投稿詳細画面のテスト 投稿成功のテスト 自分の新しい投稿が正しく保存される
@@ -353,7 +353,7 @@ Failures:
       [31m  expected to find css ".container .row .col-md-3" but there were no matches[0m
       [36m# ./spec/system/03_finishing_touches_spec.rb:350:in `block (3 levels) in <main>'[0m
 
-Finished in 23.57 seconds (files took 3.49 seconds to load)
+Finished in 19.91 seconds (files took 2.13 seconds to load)
 [31m201 examples, 10 failures[0m
 
 Failed examples:

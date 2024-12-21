@@ -22,10 +22,15 @@
               <tr>
                 <td>
                   <% if book.user.image.present? %>
-                    <%= image_tag book.user.image, class: "img-thumbnail", size: "100x100" %>
+                    <%= link_to user_path(book.user) do %>
+                      <%= image_tag book.user.image, class: "img-thumbnail", size: "100x100" %>
+                    <% end %>
                   <% else %>
                     <div class="no-image-placeholder">
-                      <p>NO IMAGE</p>
+                      <%= link_to user_path(book.user) do %>
+                        <%= image_tag book.user.get_profile_image(100, 100) %>
+                      <% end %>
+
                     </div>
                   <% end %>
                 </td>
@@ -39,5 +44,6 @@
     </div>
   </div>
 </div>
+
 
 

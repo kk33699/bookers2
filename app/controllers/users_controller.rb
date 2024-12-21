@@ -37,8 +37,9 @@ class UsersController < ApplicationController
   end
 
   def is_matching_login_user
-    unless @user.id == current_user.id
-      redirect_to books_path, alert: 'You are not authorized to edit this user.'
+    user = User.find(params[:id]) 
+    unless user.id == current_user.id
+      redirect_to user_path(current_user.id), alert: 'You are not authorized to edit this user.'
     end
   end
 end

@@ -20,10 +20,12 @@
           <% @users.each do |user| %>
             <tr>
               <td>
-                <% if user.image.present? %>
-                  <%= image_tag user.image, class: "img-thumbnail", size: "100x100" %>
-                <% else %>
-                  <div class="no-image-placeholder">NO IMAGE</div>
+                <%= link_to user_path(user) do %>
+                  <% if user.image.present? %>
+                    <%= image_tag user.image, class: "img-thumbnail", size: "100x100" %>
+                  <% else %>
+                    <%= image_tag user.get_profile_image(100, 100), class: "img-thumbnail" %>
+                  <% end %>
                 <% end %>
               </td>
               <td><%= user.name %></td>

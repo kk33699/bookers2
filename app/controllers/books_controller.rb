@@ -1,4 +1,6 @@
 class BooksController < ApplicationController
+  before_action :is_matching_login_user, only: [:edit, :update, :destroy]
+
   def new
     @book = Book.new
   end
@@ -10,6 +12,7 @@ class BooksController < ApplicationController
   end
 
   def show
+    @book_new = Book.new
     @book = Book.find(params[:id])
     @user = @book.user
     @books = Book.where(user_id: @user.id)
@@ -52,6 +55,13 @@ class BooksController < ApplicationController
   end
 
   private
+  def is_matching_login_user
+    book = Book.find(params[:id])
+    user = book.user
+    unless user.id == current_user.id
+      redirect_to books_path, alert: 'You are not authorized to edit this user.'
+    end
+  end
 
   def book_params
     params.require(:book).permit(:title, :body)

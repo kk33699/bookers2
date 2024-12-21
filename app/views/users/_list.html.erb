@@ -2,12 +2,15 @@
 <div class="col-md-3">
   <h1>User info</h1>
   <% if user&.image.present? %>
-    <%= image_tag user.image, class: "img-fluid" %>
+    <%= link_to user_path(user) do %>
+      <%= image_tag user.image, class: "img-fluid" %>
+    <% end %>
   <% else %>
-    <div class="no-image-placeholder">
-      <p>NO IMAGE</p>
-    </div>
+    <%= link_to user_path(user) do %>
+      <%= image_tag user.get_profile_image(100, 100), class: "img-fluid" %>
+    <% end %>
   <% end %>
+
   <table class="table">
     <tr>
       <th>name</th>
@@ -19,9 +22,7 @@
     </tr>
   </table>
 
-  <% if current_user == user %>
-    <%= link_to "<i class='fa-solid fa-user-gear'></i> プロフィール編集".html_safe, edit_user_path(user), class: "btn btn-secondary" %>
-  <% end %>
+   <%= link_to "<i class='fa-solid fa-user-gear'></i> プロフィール編集".html_safe, edit_user_path(user), class: "btn btn-secondary" %>
 </div>
 
 <!-- 左下: New book -->

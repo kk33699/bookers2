@@ -1,11 +1,17 @@
 <!-- 左上 User info -->
 <div class="col-md-3">
   <h1>User info</h1>
-  <% if user&.image.present? %>
-    <%= image_tag user.image, class: "img-fluid" %>
+  <% if user.present? %>
+    <%= link_to user_path(user) do %>
+      <% if user.image.present? %>
+        <%= image_tag user.image, class: "img-fluid" %>
+      <% else %>
+        <%= image_tag user.get_profile_image(100, 100), class: "img-fluid" %>
+      <% end %>
+    <% end %>
   <% else %>
     <div class="no-image-placeholder">
-      <p>NO IMAGE</p>
+      <%= image_tag "default-image.jpg", class: "img-fluid" %>
     </div>
   <% end %>
   <table class="table">
