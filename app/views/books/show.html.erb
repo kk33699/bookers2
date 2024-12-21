@@ -1,39 +1,45 @@
 <div class="container">
-  <%= render 'books/list', user: @user, book: @book_new %>
+  <div class="row">
+    <!-- 左側: -->
+    <div class="col-md-3">
+      <%= render 'books/list', user: @user, book: @book_new %>
+    </div>
 
-  <!-- 右上: Book detail -->
-
-    <h1>Book detail</h1>
-    <table class="table">
-    <tbody>
-    <% if @book.present? %>
-      <tr>
-        <td>
-          <% if @book.user&.image.present? %>
-            <%= link_to image_tag(@book.user.image, class: "img-thumbnail", size: "100x100"), user_path(@book.user) %>
+    <!-- 右側: Book detail -->
+    <div class="col-md-8 offset-md-1">
+      <h1>Book detail</h1>
+      <table class="table">
+        <tbody>
+          <% if @book.present? %>
+            <tr>
+              <td>
+                <% if @book.user&.image.present? %>
+                  <%= link_to image_tag(@book.user.image, class: "img-thumbnail", size: "100x100"), user_path(@book.user) %>
+                <% else %>
+                  <%= link_to user_path(@book.user) do %>
+                    <%= image_tag @book.user.get_profile_image(100, 100), class: "img-thumbnail", size: "100x100" %>
+                  <% end %>
+                <% end %>
+              </td>
+              <td><%= @book.title %></td>
+              <td><%= @book.body %></td>
+              <td>
+                <%= link_to @book.user.name, user_path(@book.user) %>
+              </td>
+              <td>
+                <% if @book.user == current_user %>
+                  <%= link_to 'Edit', edit_book_path(@book) %>
+                  <%= link_to 'Destroy', book_path(@book), method: :delete, data: { confirm: 'Are you sure?' } %>
+                <% end %>
+              </td>
+            </tr>
           <% else %>
-            <div class="no-image-placeholder">
-              <p>NO IMAGE</p>
-            </div>
+            <tr>
+              <td colspan="5">No book details available.</td>
+            </tr>
           <% end %>
-        </td>
-        <td><%= @book.title %></td>
-        <td><%= @book.body %></td>
-        <td>
-          <%= link_to @book.user.name, user_path(@book.user) %>
-        </td>
-        <td>
-          <% if @book.user == current_user %>
-            <%= link_to 'Edit', edit_book_path(@book) %>
-            <%= link_to 'Destroy', book_path(@book), method: :delete, data: { confirm: 'Are you sure?' } %>
-          <% end %>
-        </td>
-      </tr>
-    <% else %>
-      <tr>
-        <td colspan="5">No book details available.</td>
-      </tr>
-    <% end %>
-  </tbody>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
